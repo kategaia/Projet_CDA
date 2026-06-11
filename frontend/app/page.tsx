@@ -1,7 +1,19 @@
-export default async function Home() {
-  const res = await fetch("http://localhost:5000/api/hello");
-  const data = await res.json();
-  return <h1>{data.message}</h1>
+"use client";
 
-  
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/dashboard");
+    } else {
+      router.push("/login");
+    }
+  }, []);
+
+  return null; // La page ne s'affiche pas, elle redirige juste
 }

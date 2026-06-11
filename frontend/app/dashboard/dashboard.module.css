@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=DM+Mono&display=swap');
+
+.wrap {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* ── Header ─────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 0.5px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  color: #111827;
+}
+
+.logoutBtn {
+  font-size: 13px;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.logoutBtn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+/* ── Content ─────────────────────────────────────── */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ── Section ─────────────────────────────────────── */
+.section {
+  background: #ffffff;
+  border: 0.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #111827;
+  margin: 0 0 2px;
+}
+
+.sectionSub {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* ── Token ───────────────────────────────────────── */
+.tokenCard {
+  background: #f9fafb;
+  border: 0.5px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tokenValue {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: #374151;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tokenActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.tokenEmpty {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Grilles ─────────────────────────────────────── */
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.emptyTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+  margin: 0 0 4px;
+}
+
+.emptySub {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0 0 1.25rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.grillCard {
+  border: 0.5px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.grillCard:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+/* Aperçu miniature 5x5 */
+.preview {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  padding: 10px;
+  background: #f3f4f6;
+}
+
+.previewCell {
+  aspect-ratio: 1;
+  background: #ffffff;
+  border-radius: 3px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-family: 'DM Mono', monospace;
+  overflow: hidden;
+}
+
+.grillInfo {
+  padding: 10px 12px 6px;
+}
+
+.grillName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grillDate {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.grillActions {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px 12px;
+}
+
+/* ── Boutons ─────────────────────────────────────── */
+.btnPrimary {
+  height: 36px;
+  padding: 0 16px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.btnPrimary:hover { opacity: 0.85; }
+
+.btnSecondary {
+  height: 32px;
+  padding: 0 12px;
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.btnSecondary:hover { background: #e5e7eb; }
+
+.btnGhost {
+  height: 32px;
+  padding: 0 12px;
+  background: none;
+  color: #9ca3af;
+  border: 0.5px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.btnGhost:hover { color: #374151; }
+
+.btnDanger {
+  height: 32px;
+  padding: 0 12px;
+  background: none;
+  color: #ef4444;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.btnDanger:hover { background: #fef2f2; }
