@@ -1,0 +1,89 @@
+.wrap {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 0.5px solid #e5e7eb;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 1rem;
+}
+
+.error {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border: 0.5px solid #fca5a5;
+}
+
+.success {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border: 0.5px solid #86efac;
+}
+
+.card {
+  background: #ffffff;
+  border: 0.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.card p {
+  font-size: 14px;
+  color: #374151;
+  margin: 0 0 10px;
+}
+
+.card input {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 0.5px solid #d1d5db;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.card button {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 8px;
+}

@@ -9,6 +9,7 @@ from routes.auth import auth_bp
 from routes.grilles import grilles_bp
 from routes.plugin import plugin_bp
 from routes.token import token_bp
+from routes.profil import profil_bp
 
 
 def create_app():
@@ -28,6 +29,7 @@ def create_app():
     app.register_blueprint(grilles_bp)
     app.register_blueprint(plugin_bp)
     app.register_blueprint(token_bp)
+    app.register_blueprint(profil_bp)
 
     # Crée les tables si elles n'existent pas
     with app.app_context():

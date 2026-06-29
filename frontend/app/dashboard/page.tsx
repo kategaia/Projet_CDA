@@ -111,6 +111,9 @@ export default function DashboardPage() {
         <div className={styles.headerLeft}>
           <span className={styles.logo}>🎯 BingoMC</span>
         </div>
+        <button onClick={() => router.push("/profil")}>
+          Profil
+        </button>
         <button onClick={handleLogout} className={styles.logoutBtn}>
           Déconnexion
         </button>
