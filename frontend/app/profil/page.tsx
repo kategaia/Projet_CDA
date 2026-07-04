@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import styles from "./profil.module.css";
-import { error } from "console";
 
 interface Profil {
     pseudo: string;
@@ -155,6 +154,18 @@ export default function ProfilPage() {
                         </div>
                     ) : (
                     <div className={styles.card}>
+                        {profil.pseudo_mc == null ? (
+                            <img 
+                            src={`https://mc-heads.net/avatar/steve/32`}
+                            alt="Avatar Par défaut"
+                            />
+
+                        ) : (
+                            <img
+                            src={`https://mc-heads.net/avatar/${profil.pseudo_mc}/32`}
+                            alt="Avatar MC"
+                            />
+                        )}
                         <p>Pseudo: {profil.pseudo}</p>
                         <p>Pseudo Minecraft: {profil.pseudo_mc==null ? "Pseudo non Renseigné" : profil.pseudo_mc}</p>
                         <p>Email: {profil.email}</p>

@@ -19,6 +19,9 @@ def create_app():
 
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "change_moi")
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_pre_ping": True  # vérifie la connexion avant chaque requête
+    }
 
     # Lie les extensions à l'app
     db.init_app(app)
