@@ -19,13 +19,18 @@ export default function DashboardPage() {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [tokenCopied, setTokenCopied] = useState(false);
+  const [showToken, setShowToken] = useState(false);
+  const [pseudoMc, setPseudoMc] = useState<string | null>(null);
 
   const API = process.env.NEXT_PUBLIC_API_URL;
 
   // Récupère le header Authorization avec le JWT stocké au login
   function authHeader() {
     const jwt = localStorage.getItem("token");
-    return { Authorization: `Bearer ${jwt}`, "Content-Type": "application/json" };
+    return {
+      Authorization: `Bearer ${jwt}`,
+      "Content-Type": "application/json",
+    };
   }
 
   // Vérifie que l'utilisateur est connecté, sinon redirige vers /login
@@ -42,9 +47,10 @@ export default function DashboardPage() {
   async function fetchAll() {
     setLoading(true);
     try {
-      const [grillesRes, tokenRes] = await Promise.all([
+      const [grillesRes, tokenRes, profilRes] = await Promise.all([
         fetch(`${API}/api/grilles`, { headers: authHeader() }),
         fetch(`${API}/api/token`, { headers: authHeader() }),
+        fetch(`${API}/api/profil`, { headers: authHeader() }),
       ]);
 
       const grillesData = await grillesRes.json();
@@ -55,6 +61,9 @@ export default function DashboardPage() {
         const tokenData = await tokenRes.json();
         if (tokenData.success) setToken(tokenData.token.valeur);
       }
+
+      const profilData = await profilRes.json();
+      if (profilData.success) setPseudoMc(profilData.user.pseudo_mc);
     } catch {
       console.error("Erreur de chargement");
     } finally {
@@ -111,49 +120,82 @@ export default function DashboardPage() {
         <div className={styles.headerLeft}>
           <span className={styles.logo}>🎯 BingoMC</span>
         </div>
-        <button onClick={() => router.push("/profil")}>
-          Profil
-        </button>
-        <button onClick={handleLogout} className={styles.logoutBtn}>
-          Déconnexion
-        </button>
+        <div className={styles.headerRight}>
+          {pseudoMc && (
+            <img
+              src={`https://mc-heads.net/avatar/${pseudoMc}/32`}
+              alt="Avatar"
+              className={styles.avatar}
+            />
+          )}
+          <button
+            onClick={() => router.push("/profil")}
+            className={styles.logoutBtn}
+          >
+            Profil
+          </button>
+          <button onClick={handleLogout} className={styles.logoutBtn}>
+            Déconnexion
+          </button>
+        </div>
       </header>
 
       <div className={styles.content}>
-
         {/* Section token plugin */}
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <div>
               <h2 className={styles.sectionTitle}>Token plugin</h2>
               <p className={styles.sectionSub}>
-                Colle ce token dans la config de ton plugin Minecraft pour accéder à tes grilles.
+                Colle ce token dans la config de ton plugin Minecraft pour
+                accéder à tes grilles.
               </p>
             </div>
           </div>
 
           <div className={styles.tokenCard}>
-            {token ? (
-              <>
-                {/* Affiche le token tronqué pour ne pas prendre trop de place */}
-                <code className={styles.tokenValue}>
-                  {token.slice(0, 16)}…{token.slice(-8)}
-                </code>
-                <div className={styles.tokenActions}>
-                  <button onClick={handleCopyToken} className={styles.btnSecondary}>
-                    {tokenCopied ? "Copié ✓" : "Copier le token"}
-                  </button>
-                  <button onClick={handleGenerateToken} className={styles.btnGhost}>
-                    Régénérer
-                  </button>
-                </div>
-              </>
+            {showToken === false ? (
+              <button onClick={() => setShowToken(true)}>
+                Afficher le token
+              </button>
             ) : (
               <>
-                <p className={styles.tokenEmpty}>Aucun token généré.</p>
-                <button onClick={handleGenerateToken} className={styles.btnPrimary}>
-                  Générer un token
+                <button onClick={() => setShowToken(false)}>
+                  Masquer le token
                 </button>
+
+                {token ? (
+                  <>
+                    {/* Affiche le token tronqué pour ne pas prendre trop de place */}
+                    <code className={styles.tokenValue}>
+                      {token.slice(0, 16)}…{token.slice(-8)}
+                    </code>
+                    <div className={styles.tokenActions}>
+                      <button
+                        onClick={handleCopyToken}
+                        className={styles.btnSecondary}
+                      >
+                        {tokenCopied ? "Copié ✓" : "Copier le token"}
+                      </button>
+                      <button
+                        onClick={handleGenerateToken}
+                        className={styles.btnGhost}
+                      >
+                        Régénérer
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className={styles.tokenEmpty}>Aucun token généré.</p>
+                    <button
+                      onClick={handleGenerateToken}
+                      className={styles.btnPrimary}
+                    >
+                      Générer un token
+                    </button>
+                  </>
+                )}
               </>
             )}
           </div>
@@ -164,7 +206,10 @@ export default function DashboardPage() {
           <div className={styles.sectionHeader}>
             <div>
               <h2 className={styles.sectionTitle}>Mes grilles</h2>
-              <p className={styles.sectionSub}>{grilles.length} grille{grilles.length !== 1 ? "s" : ""} créée{grilles.length !== 1 ? "s" : ""}</p>
+              <p className={styles.sectionSub}>
+                {grilles.length} grille{grilles.length !== 1 ? "s" : ""} créée
+                {grilles.length !== 1 ? "s" : ""}
+              </p>
             </div>
             <button
               onClick={() => router.push("/grilles/new")}
@@ -177,8 +222,12 @@ export default function DashboardPage() {
           {/* Liste vide */}
           {grilles.length === 0 ? (
             <div className={styles.empty}>
-              <p className={styles.emptyTitle}>Aucune grille pour l&apos;instant.</p>
-              <p className={styles.emptySub}>Crée ta première grille de bingo Minecraft.</p>
+              <p className={styles.emptyTitle}>
+                Aucune grille pour l&apos;instant.
+              </p>
+              <p className={styles.emptySub}>
+                Crée ta première grille de bingo Minecraft.
+              </p>
               <button
                 onClick={() => router.push("/grilles/new")}
                 className={styles.btnPrimary}

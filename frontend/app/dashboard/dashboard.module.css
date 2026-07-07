@@ -1,9 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&family=DM+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600&display=swap');
 
+/* ── Base ──────────────────────────────────────────────────────── */
 .wrap {
   min-height: 100vh;
-  background-color: #f9fafb;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
+  background-image: url('/bg-savane.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Overlay sombre sur le fond */
+.wrap::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+/* Tout le contenu au-dessus de l'overlay */
+.wrap > * {
+  position: relative;
+  z-index: 1;
 }
 
 .loading {
@@ -11,19 +31,22 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  font-size: 14px;
-  color: #9ca3af;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  color: #f0a030;
+  text-shadow: 2px 2px 0 #000;
 }
 
-/* ── Header ─────────────────────────────────────── */
+/* ── Header ────────────────────────────────────────────────────── */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
   height: 56px;
-  background: #ffffff;
-  border-bottom: 0.5px solid #e5e7eb;
+  background: rgba(0, 0, 0, 0.75);
+  border-bottom: 2px solid #5a5a5a;
+  backdrop-filter: blur(4px);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -36,42 +59,50 @@
 }
 
 .logo {
-  font-family: 'DM Serif Display', serif;
-  font-size: 18px;
-  color: #111827;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  color: #f0a030;
+  text-shadow: 2px 2px 0 #000;
+  letter-spacing: 1px;
 }
 
 .logoutBtn {
+  font-family: 'Inter', sans-serif;
   font-size: 13px;
-  color: #6b7280;
+  color: #aaa;
   background: none;
   border: none;
   cursor: pointer;
   padding: 6px 12px;
-  border-radius: 6px;
-  transition: background 0.15s;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
 }
 .logoutBtn:hover {
-  background: #f3f4f6;
-  color: #111827;
+  color: #fff;
+  background: rgba(255,255,255,0.1);
 }
 
-/* ── Content ─────────────────────────────────────── */
+/* ── Content ───────────────────────────────────────────────────── */
 .content {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-/* ── Section ─────────────────────────────────────── */
+/* ── Section — style "inventory panel" ────────────────────────── */
 .section {
-  background: #ffffff;
-  border: 0.5px solid #e5e7eb;
-  border-radius: 12px;
+  background: rgba(20, 20, 20, 0.88);
+  border: 2px solid #5a5a5a;
+  /* Effet relief Minecraft : clair en haut/gauche, sombre en bas/droite */
+  box-shadow:
+    inset 2px 2px 0 #888,
+    inset -2px -2px 0 #222;
+  border-radius: 3px;
   padding: 1.5rem;
+  backdrop-filter: blur(6px);
 }
 
 .sectionHeader {
@@ -83,24 +114,26 @@
 }
 
 .sectionTitle {
-  font-family: 'DM Serif Display', serif;
-  font-size: 20px;
-  font-weight: 400;
-  color: #111827;
-  margin: 0 0 2px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 13px;
+  color: #f0a030;
+  text-shadow: 1px 1px 0 #000;
+  margin: 0 0 8px;
+  line-height: 1.6;
 }
 
 .sectionSub {
   font-size: 13px;
-  color: #6b7280;
+  color: #999;
   margin: 0;
 }
 
-/* ── Token ───────────────────────────────────────── */
+/* ── Token ─────────────────────────────────────────────────────── */
 .tokenCard {
-  background: #f9fafb;
-  border: 0.5px solid #e5e7eb;
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #444;
+  box-shadow: inset 1px 1px 0 #555, inset -1px -1px 0 #111;
+  border-radius: 2px;
   padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
@@ -109,9 +142,9 @@
 }
 
 .tokenValue {
-  font-family: 'DM Mono', monospace;
-  font-size: 13px;
-  color: #374151;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: #f0a030;
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -127,65 +160,70 @@
 
 .tokenEmpty {
   font-size: 13px;
-  color: #9ca3af;
+  color: #666;
   margin: 0;
   flex: 1;
 }
 
-/* ── Grilles ─────────────────────────────────────── */
+/* ── Grilles ───────────────────────────────────────────────────── */
 .empty {
   text-align: center;
   padding: 3rem 1rem;
 }
 
 .emptyTitle {
-  font-size: 15px;
-  font-weight: 500;
-  color: #374151;
-  margin: 0 0 4px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: #f0a030;
+  text-shadow: 1px 1px 0 #000;
+  margin: 0 0 8px;
+  line-height: 1.8;
 }
 
 .emptySub {
   font-size: 13px;
-  color: #9ca3af;
-  margin: 0 0 1.25rem;
+  color: #777;
+  margin: 0 0 1.5rem;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
 }
 
+/* Carte grille — style slot inventaire */
 .grillCard {
-  border: 0.5px solid #e5e7eb;
-  border-radius: 10px;
+  background: rgba(30, 30, 30, 0.9);
+  border: 2px solid #5a5a5a;
+  box-shadow: inset 2px 2px 0 #777, inset -2px -2px 0 #111;
+  border-radius: 2px;
   overflow: hidden;
-  transition: box-shadow 0.15s;
+  transition: transform 0.1s;
 }
 .grillCard:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
 }
 
-/* Aperçu miniature 5x5 */
+/* Aperçu 5x5 */
 .preview {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2px;
-  padding: 10px;
-  background: #f3f4f6;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .previewCell {
   aspect-ratio: 1;
-  background: #ffffff;
-  border-radius: 3px;
-  font-size: 9px;
+  background: rgba(80, 80, 80, 0.6);
+  border: 1px solid #444;
+  font-size: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6b7280;
-  font-family: 'DM Mono', monospace;
+  color: #aaa;
+  font-family: 'Press Start 2P', monospace;
   overflow: hidden;
 }
 
@@ -194,18 +232,20 @@
 }
 
 .grillName {
-  font-size: 14px;
-  font-weight: 500;
-  color: #111827;
-  margin: 0 0 2px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #f5f5f0;
+  text-shadow: 1px 1px 0 #000;
+  margin: 0 0 6px;
+  line-height: 1.6;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .grillDate {
-  font-size: 12px;
-  color: #9ca3af;
+  font-size: 11px;
+  color: #666;
   margin: 0;
 }
 
@@ -215,61 +255,101 @@
   padding: 8px 12px 12px;
 }
 
-/* ── Boutons ─────────────────────────────────────── */
+/* ── Boutons ───────────────────────────────────────────────────── */
+
+/* Bouton primaire — style bouton Minecraft */
 .btnPrimary {
   height: 36px;
   padding: 0 16px;
-  background: #111827;
+  background: #5a8a3c;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
+  border-top: 3px solid #7ab050;
+  border-left: 3px solid #7ab050;
+  border-right: 3px solid #2a4a1c;
+  border-bottom: 3px solid #2a4a1c;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
   cursor: pointer;
-  transition: opacity 0.15s;
+  text-shadow: 1px 1px 0 #000;
+  transition: filter 0.1s;
   white-space: nowrap;
+  border-radius: 2px;
 }
-.btnPrimary:hover { opacity: 0.85; }
+.btnPrimary:hover { filter: brightness(1.15); }
+.btnPrimary:active {
+  border-top: 3px solid #2a4a1c;
+  border-left: 3px solid #2a4a1c;
+  border-right: 3px solid #7ab050;
+  border-bottom: 3px solid #7ab050;
+}
 
 .btnSecondary {
   height: 32px;
   padding: 0 12px;
-  background: #f3f4f6;
-  color: #374151;
+  background: #5a5a5a;
+  color: #f5f5f0;
   border: none;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
+  border-top: 2px solid #888;
+  border-left: 2px solid #888;
+  border-right: 2px solid #222;
+  border-bottom: 2px solid #222;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
   cursor: pointer;
-  transition: background 0.15s;
+  text-shadow: 1px 1px 0 #000;
+  transition: filter 0.1s;
   white-space: nowrap;
+  border-radius: 2px;
 }
-.btnSecondary:hover { background: #e5e7eb; }
+.btnSecondary:hover { filter: brightness(1.2); }
+.btnSecondary:active {
+  border-top: 2px solid #222;
+  border-left: 2px solid #222;
+  border-right: 2px solid #888;
+  border-bottom: 2px solid #888;
+}
 
 .btnGhost {
   height: 32px;
   padding: 0 12px;
-  background: none;
-  color: #9ca3af;
-  border: 0.5px solid #e5e7eb;
-  border-radius: 6px;
+  background: transparent;
+  color: #999;
+  border: 1px solid #555;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   cursor: pointer;
-  transition: color 0.15s;
+  border-radius: 2px;
+  transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
 }
-.btnGhost:hover { color: #374151; }
+.btnGhost:hover { color: #f5f5f0; border-color: #888; }
 
 .btnDanger {
   height: 32px;
   padding: 0 12px;
   background: none;
-  color: #ef4444;
+  color: #c0392b;
   border: none;
-  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   cursor: pointer;
-  transition: background 0.15s;
+  border-radius: 2px;
+  transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
-.btnDanger:hover { background: #fef2f2; }
+.btnDanger:hover { background: rgba(192,57,43,0.15); color: #e74c3c; }
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  border: 2px solid #5a5a5a;
+  border-radius: 2px;
+}

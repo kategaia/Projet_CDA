@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import styles from "./grille.module.css"
+import { getMinecraftIcon } from "@/lib/minecraftIcons";
 
 export default function GrillePage() {
 
@@ -74,10 +75,18 @@ export default function GrillePage() {
 
             <div className={styles.grille}>
                 {cases.map((caseValue, i) => (
-                    <div key={i} 
-                    onClick={() => setIndex(i)}
-                    className={`${styles.case} ${caseValue ? styles.caseRemplie : ""}`}>
-                        {caseValue || "+"}
+                    <div key={i} className={`${styles.case} ${caseValue ? styles.caseRemplie : ""}`} onClick={() => setIndex(i)}>
+                        {caseValue ? (
+                            <>
+                                <img
+                                src={getMinecraftIcon(caseValue)}
+                                alt=""
+                                className={styles.caseIcon}
+                                onError={(e) => (e.currentTarget.style.display = "none")}
+                                />
+                                <span className={styles.caseText}>{caseValue}</span>
+                            </>
+                        ) : "+"}
                     </div>
                 ))}
             </div>
