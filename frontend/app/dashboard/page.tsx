@@ -3,12 +3,19 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./dashboard.module.css";
+import { getMinecraftIcon } from "@/lib/minecraftIcons";
+
+interface Case {
+  type: string;
+  cible: string;
+  quantite: number;
+}
 
 // Type pour une grille
 interface Grille {
   id: number;
   nom: string;
-  cases: string[];
+  cases: Case[];
   created_at: string;
 }
 
@@ -242,8 +249,23 @@ export default function DashboardPage() {
                   {/* Aperçu 5x5 miniature */}
                   <div className={styles.preview}>
                     {grille.cases.slice(0, 25).map((c, i) => (
-                      <div key={i} className={styles.previewCell} title={c}>
-                        {c.slice(0, 2)}
+                      <div
+                        key={i}
+                        className={styles.previewCell}
+                        title={c.cible}
+                      >
+                        <img
+                          src={getMinecraftIcon(c.cible, c.type)}
+                          alt=""
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            imageRendering: "pixelated",
+                          }}
+                          onError={(e) =>
+                            (e.currentTarget.style.display = "none")
+                          }
+                        />
                       </div>
                     ))}
                   </div>
