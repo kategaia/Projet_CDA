@@ -295,3 +295,31 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(20, 20, 20, 0.98);
+    border: 2px solid #5a5a5a;
+    box-shadow: inset 2px 2px 0 #888, inset -2px -2px 0 #222;
+    z-index: 100;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestionItem {
+    padding: 8px 12px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: #f5f5f0;
+    cursor: pointer;
+    line-height: 1.8;
+    border-bottom: 1px solid #333;
+}
+
+.suggestionItem:hover {
+    background: rgba(240, 160, 48, 0.2);
+    color: #f0a030;
+}

@@ -1,43 +1,34 @@
-const iconMap: Record<string, string> = {
-  "diamant": "Invicon_Diamond",
-  "poulet": "Invicon_Raw_Chicken",
-  "village": "Invicon_Oak_Door",
-  "vache": "Invicon_Raw_Beef",
-  "cochon": "Invicon_Raw_Porkchop",
-  "bâton": "Invicon_Stick",
-  "enclume": "Invicon_Anvil",
-  "jungle": "Invicon_Jungle_Sapling",
-  "dragon egg": "Invicon_Dragon_Egg",
-  "escalier en pierre": "Invicon_Stone_Stairs",
-  "emeraude": "Invicon_Emerald",
-  "lingot de fer": "Invicon_Iron_Ingot",
-  "repeteur": "Invicon_Redstone_Repeater",
-  "bois de chêne pale": "Invicon_Pale_Oak_Wood",
-  "escalier en bouleau": "Invicon_Birch_Stairs",
-  "comparateur": "Invicon_Redstone_Comparator",
-  "ancre de réapparition": "Invicon_Respawn_Anchor",
-  "minerai de charbon des abimes": "Invicon_Deepslate_Coal_Ore",
+/**
+ * Convertit un nom Bukkit (SNAKE_CASE) en nom wiki Minecraft (Title_Case)
+ * Exemple : PALE_OAK_LOG → Pale_Oak_Log
+ */
+function bukkitToWikiName(bukkit: string): string {
+  return bukkit
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join("_");
+}
+
+/**
+ * Retourne l'URL de l'icône Minecraft selon le type et la cible.
+ * - TUER    → épée en diamant
+ * - TROUVER → carte
+ * - SUCCES  → livre de connaissance
+ * - OBTENIR / CRAFTER → icône de l'item automatiquement depuis le nom Bukkit
+ */
+// Exceptions : noms Bukkit → noms wiki différents
+const exceptions: Record<string, string> = {
+  "DRAGON_BREATH": "Dragon's_Breath",
+  "REPEATER": "Redstone_Repeater",
+  "COMPARATOR": "Redstone_Comparator",
 };
 
-const DEFAULT_ICON = "https://minecraft.wiki/images/Invicon_Barrier.png";
-
 export function getMinecraftIcon(cible: string, type: string): string {
-  if (type === "TUER") {
-    return "https://minecraft.wiki/images/Invicon_Diamond_Sword.png";
-  }
-  if (type === "TROUVER") {
-    return "https://minecraft.wiki/images/Invicon_Map.png";
-  }
-  if (type === "SUCCES") {
-    return "https://minecraft.wiki/images/Invicon_Knowledge_Book.png";
-  }
+  if (type === "TUER") return "https://minecraft.wiki/images/Invicon_Diamond_Sword.png";
+  if (type === "TROUVER") return "https://minecraft.wiki/images/Invicon_Map.png";
+  if (type === "SUCCES") return "https://minecraft.wiki/images/Invicon_Knowledge_Book.png";
 
-  const lower = cible.toLowerCase();
-  for (const [mot, item] of Object.entries(iconMap)) {
-    if (lower.includes(mot)) {
-      return `https://minecraft.wiki/images/${item}.png`;
-    }
-  }
-
-  return DEFAULT_ICON;
+  // Vérifie d'abord les exceptions
+  const wikiName = exceptions[cible] ?? bukkitToWikiName(cible);
+  return `https://minecraft.wiki/images/Invicon_${wikiName}.png`;
 }
