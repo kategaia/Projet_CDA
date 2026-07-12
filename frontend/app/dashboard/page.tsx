@@ -125,7 +125,7 @@ export default function DashboardPage() {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          <span className={styles.logo}>🎯 BingoMC</span>
+          <span className={styles.logo}>🎯 VoxcelBingo</span>
         </div>
         <div className={styles.headerRight}>
           {pseudoMc && (
