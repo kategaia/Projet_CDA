@@ -61,6 +61,7 @@ export default function RegisterPage() {
   return (
     <main className={styles.wrap}>
       <div className={styles.card}>
+        <img src="/voxelbingo_logo.png" alt="VoxelBingo" className={styles.logo} />
         <h1 className={styles.title}>Créer un compte.</h1>
         <p className={styles.subtitle}>Rejoins ton espace en quelques secondes.</p>
 

@@ -27,6 +27,9 @@ export default function ProfilPage() {
   const [editPseudo, setEditPseudo] = useState("");
   const [editPseudoMc, setEditPseudoMc] = useState("");
   const [editEmail, setEditEmail] = useState("");
+  const [editOldPassword, setEditOldPassword] = useState("");
+  const [editPassword, setEditPassword] = useState("");
+  const [editConfirmPassword, setEditConfirmPassword] = useState("");
 
   function authHeader() {
     const jwt = localStorage.getItem("token");
@@ -68,6 +71,10 @@ export default function ProfilPage() {
   function handleEdit() {
     if (!profil) return;
 
+    setEditOldPassword("");
+    setEditPassword("");
+    setEditConfirmPassword("");
+
     setEditEmail(profil.email);
     setEditPseudo(profil.pseudo);
     if (profil.pseudo_mc == null) {
@@ -79,6 +86,14 @@ export default function ProfilPage() {
   }
 
   async function handleSave() {
+    if (editPassword && editPassword !== editConfirmPassword) {
+      setAlerte({
+        message: "Les mots de passe ne correspondent pas",
+        type: "error",
+      });
+      return;
+    }
+
     try {
       const res = await fetch(`${API}/api/profil`, {
         method: "PUT",
@@ -87,6 +102,8 @@ export default function ProfilPage() {
           pseudo: editPseudo,
           pseudo_mc: editPseudoMc || null,
           email: editEmail,
+          old_password: editOldPassword || undefined,
+          password: editPassword || undefined,
         }),
       });
 
@@ -127,9 +144,18 @@ export default function ProfilPage() {
     <main className={styles.wrap}>
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          <button onClick={handleDashboard} className={styles.backBtn}>← Retour</button>
+          <img
+            src="/voxelbingo_logo.png"
+            alt="VoxelBingo"
+            className={styles.logo}
+          />
         </div>
         <h1 className={styles.headerTitle}>Profil</h1>
+        <div className={styles.headerRight}>
+          <button onClick={handleDashboard} className={styles.backBtn}>
+            Retour →
+          </button>
+        </div>
       </header>
       <div className={styles.content}>
         {alerte && (
@@ -141,31 +167,76 @@ export default function ProfilPage() {
         {profil &&
           (isEditing ? (
             <div className={styles.form}>
+              <label className={styles.label}>Pseudo</label>
               <input
-                className={`${styles.fieldGroup} ${styles.label} ${styles.input}`}
+                className={`${styles.input}`}
                 id="pseudo"
                 type="text"
                 value={editPseudo}
                 onChange={(e) => setEditPseudo(e.target.value)}
               />
+              <label className={styles.label}>Pseudo Minecraft</label>
               <input
-                className={`${styles.fieldGroup} ${styles.label} ${styles.input}`}
+                className={`${styles.input}`}
                 id="pseudo_mc"
                 type="text"
                 value={editPseudoMc}
                 onChange={(e) => setEditPseudoMc(e.target.value)}
               />
+              <label className={styles.label}>Adresse e-mail</label>
               <input
-                className={`${styles.fieldGroup} ${styles.label} ${styles.input}`}
+                className={`${styles.input}`}
                 id="email"
                 type="email"
                 value={editEmail}
                 onChange={(e) => setEditEmail(e.target.value)}
               />
 
-              <button onClick={() => setIsEditing(false)}>Annuler</button>
+              <label className={styles.label}>Ancien mot de passe</label>
+              <input
+                className={styles.input}
+                id="old_password"
+                type="password"
+                placeholder="Laisse vide pour ne pas changer"
+                value={editOldPassword}
+                onChange={(e) => setEditOldPassword(e.target.value)}
+              />
 
-              <button onClick={handleSave}>Enregistrer</button>
+              <label className={styles.label}>Nouveau mot de passe</label>
+              <input
+                className={styles.input}
+                id="password"
+                type="password"
+                placeholder="8 caractères minimum"
+                value={editPassword}
+                onChange={(e) => setEditPassword(e.target.value)}
+              />
+
+              <label className={styles.label}>Confirmer le mot de passe</label>
+              <input
+                className={`${styles.input} ${editConfirmPassword && editPassword !== editConfirmPassword ? styles.inputError : ""}`}
+                id="confirm_password"
+                type="password"
+                placeholder="••••••••"
+                value={editConfirmPassword}
+                onChange={(e) => setEditConfirmPassword(e.target.value)}
+              />
+              {editConfirmPassword && editPassword !== editConfirmPassword && (
+                <p className={styles.fieldError}>
+                  Les mots de passe ne correspondent pas.
+                </p>
+              )}
+
+              <button
+                onClick={() => setIsEditing(false)}
+                className={styles.btnSecondary}
+              >
+                Annuler
+              </button>
+
+              <button onClick={handleSave} className={styles.btnPrimary}>
+                Enregistrer
+              </button>
             </div>
           ) : (
             <div className={styles.card}>

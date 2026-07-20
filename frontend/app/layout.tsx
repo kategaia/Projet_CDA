@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VoxcelBingo",
+  title: "VoxelBingo",
   description: "Crée et gère tes grilles de Bingo Minecraft",
+  icons: {
+    icon: "/voxelbingo_favicon.svg",
+  },
 };
 
 export default function RootLayout({

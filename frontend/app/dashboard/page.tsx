@@ -125,7 +125,7 @@ export default function DashboardPage() {
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
-          <span className={styles.logo}>🎯 VoxcelBingo</span>
+          <img src="/voxelbingo_logo.png" alt="VoxelBingo" className={styles.logo} />
         </div>
         <div className={styles.headerRight}>
           {pseudoMc && (
@@ -137,7 +137,7 @@ export default function DashboardPage() {
           )}
           <button
             onClick={() => router.push("/profil")}
-            className={styles.logoutBtn}
+            className={styles.profileBtn}
           >
             Profil
           </button>

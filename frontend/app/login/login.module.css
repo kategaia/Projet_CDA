@@ -239,3 +239,10 @@
   font-size: 9px;
 }
 .registerLink:hover, .loginLink:hover { text-decoration: underline; }
+
+.logo {
+    height: 64px;
+    width: auto;
+    image-rendering: pixelated;
+    margin-bottom: 1rem;
+}

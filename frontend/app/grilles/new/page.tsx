@@ -91,14 +91,16 @@ export default function GrillePage() {
   return (
     <main className={styles.wrap}>
       <header className={styles.header}>
-        <button
-          onClick={() => router.push("/dashboard")}
-          className={styles.backBtn}
-        >
-          ← Retour
+    <div className={styles.headerLeft}>
+        <img src="/voxelbingo_logo.png" alt="VoxelBingo" className={styles.logo} />
+    </div>
+    <span className={styles.headerTitle}>Créer une grille</span>
+    <div className={styles.headerRight}>
+        <button onClick={() => router.push("/dashboard")} className={styles.backBtn}>
+            Retour →
         </button>
-        <span className={styles.headerTitle}>Créer une grille</span>
-      </header>
+    </div>
+</header>
 
       <div className={styles.content}>
         {alert && (

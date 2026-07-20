@@ -66,21 +66,31 @@
   letter-spacing: 1px;
 }
 
-.logoutBtn {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  color: #aaa;
+.profileBtn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #f0a030;
   background: none;
   border: none;
   cursor: pointer;
+  text-shadow: 1px 1px 0 #000;
   padding: 6px 12px;
-  border-radius: 3px;
-  transition: color 0.15s, background 0.15s;
+  transition: color 0.15s;
 }
-.logoutBtn:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.1);
+.profileBtn:hover { color: #ffc040; }
+
+.logoutBtn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: #f0a030;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 #000;
+  padding: 6px 12px;
+  transition: color 0.15s;
 }
+.logoutBtn:hover { color: #ffc040; }
 
 /* ── Content ───────────────────────────────────────────────────── */
 .content {
@@ -352,4 +362,10 @@
   image-rendering: pixelated;
   border: 2px solid #5a5a5a;
   border-radius: 2px;
+}
+
+.logo {
+  height: 70px;
+  width: auto;
+  image-rendering: pixelated;
 }

@@ -118,15 +118,17 @@ export default function ModifierGrille() {
 
   return (
     <main className={styles.wrap}>
-      <header className={styles.header}>
-        <button
-          onClick={() => router.push("/dashboard")}
-          className={styles.backBtn}
-        >
-          ← Retour
+<header className={styles.header}>
+    <div className={styles.headerLeft}>
+        <img src="/voxelbingo_logo.png" alt="VoxelBingo" className={styles.logo} />
+    </div>
+    <span className={styles.headerTitle}>Modifier la grille</span>
+    <div className={styles.headerRight}>
+        <button onClick={() => router.push("/dashboard")} className={styles.backBtn}>
+            Retour →
         </button>
-        <span className={styles.headerTitle}>Modifier la grille</span>
-      </header>
+    </div>
+</header>
 
       <div className={styles.content}>
         {alert && (

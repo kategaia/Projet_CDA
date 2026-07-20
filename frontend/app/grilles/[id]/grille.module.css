@@ -63,7 +63,7 @@
 
 .backBtn {
   font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-size: 12px;
   color: #f0a030;
   background: none;
   border: none;
@@ -322,4 +322,16 @@
 .suggestionItem:hover {
     background: rgba(240, 160, 48, 0.2);
     color: #f0a030;
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.logo {
+  height: 70px;
+  width: auto;
+  image-rendering: pixelated;
 }

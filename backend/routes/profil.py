@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, request, jsonify
-from extensions import db
+from extensions import db, bcrypt
 from models import User
 from utils import token_required
 
@@ -40,6 +40,11 @@ def update_profil():
         if email_existant:
             return jsonify({"success": False, "message": "Email déjà utilisé !"}), 409
         user.email = data["email"]
+    if "password" in data and data["password"]:
+    # Vérifie l'ancien mot de passe avant de changer
+        if not bcrypt.check_password_hash(user.password, data.get("old_password", "")):
+            return jsonify({"success": False, "message": "Ancien mot de passe incorrect"}), 401
+        user.password = bcrypt.generate_password_hash(data["password"]).decode("utf-8")
 
     db.session.commit()
     return jsonify({"success": True, "message": "Profil mis à jour !"})

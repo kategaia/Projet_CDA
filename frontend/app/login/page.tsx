@@ -57,6 +57,7 @@ export default function LoginPage() {
   return (
     <main className={styles.wrap}>
       <div className={styles.card}>
+        <img src="/voxelbingo_logo.png" alt="VoxelBingo" className={styles.logo} />
         <h1 className={styles.title}>Bon retour.</h1>
         <p className={styles.subtitle}>Connecte-toi à ton espace.</p>
 
