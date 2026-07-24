@@ -154,8 +154,8 @@ export default function DashboardPage() {
             <div>
               <h2 className={styles.sectionTitle}>Token plugin</h2>
               <p className={styles.sectionSub}>
-                Colle ce token dans la config de ton plugin Minecraft pour
-                accéder à tes grilles.
+                Colle ce token dans à la fin de la commande /bg login pour
+                lié ton compte et récupérer tes grilles en jeu
               </p>
             </div>
           </div>
