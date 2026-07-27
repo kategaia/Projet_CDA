@@ -34,14 +34,12 @@ def create_app():
     app.register_blueprint(token_bp)
     app.register_blueprint(profil_bp)
 
-    # Crée les tables si elles n'existent pas
-    with app.app_context():
-        import models  # noqa: F401
-        db.create_all()
-
     return app
 
 
 if __name__ == "__main__":
     app = create_app()
+    with app.app_context():
+        import models  # noqa: F401
+        db.create_all()
     app.run(host="0.0.0.0", port=5000, debug=True)
